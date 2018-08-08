@@ -17,7 +17,7 @@
   </head>
   <body>
 
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="border-bottom: 5px solid; margin-bottom: 10px;">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark material-shadow">
       <a class="navbar-brand" href="#">Projeto Matrix 3 - Exercício</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -118,7 +118,7 @@
             </form>
           </div>
           <div class="card-footer">
-            <button class="btn btn-primary material-shadow btn-no-radius" style="float:right" onclick="cadastrarParticipante(document.querySelector('form#form-cadastro'))">Cadastrar</button>
+            <button class="btn btn-primary material-shadow-hoverable btn-no-radius" style="float:right" onclick="cadastrarParticipante(document.querySelector('form#form-cadastro'))">Cadastrar</button>
           </div>
         </div>
       </div>
@@ -126,7 +126,7 @@
 
     <div class="modal fade" id="edicao-participante" tabindex="-1" role="dialog" aria-labelledby="edicao-participante" aria-hidden="true">
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content material-shadow-hoverable">
           <div class="modal-header">
             <h5 class="modal-title" id="titulo-modal">Editar Participante</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -137,7 +137,7 @@
           </div>
           <div class="modal-footer">
             <!-- <button type="button" class="btn btn-danger" onclick="excluirParticipante(document.querySelector('form#form-edicao'))">Excluir</button> -->
-            <button type="button" class="btn btn-primary btn-no-radius material-shadow" onclick="editarParticipante(document.querySelector('form#form-edicao'))">Salvar</button>
+            <button type="button" class="btn btn-primary btn-no-radius material-shadow-hoverable" onclick="editarParticipante(document.querySelector('form#form-edicao'))">Salvar</button>
           </div>
         </div>
       </div>

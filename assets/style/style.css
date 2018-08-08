@@ -1,5 +1,15 @@
+nav {
+  margin-bottom: 20px;
+}
 .material-shadow {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.material-shadow-hoverable {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);  
+}
+.material-shadow-hoverable:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 body {
   background-color: #f7f7f7;
@@ -15,7 +25,6 @@ button.btn-no-radius {
   border-bottom: none;
   padding-bottom: 0;
 }
-
 #participantes > .card {
   min-height: calc(100vh - 110px);
 
@@ -23,18 +32,20 @@ button.btn-no-radius {
 td:hover {
   cursor: pointer;
 }
-
 #card-cadastro > .card-footer {
   background: none;
   border: 0;
   padding-top: 0;
 }
-
 .modal-content {
   border-radius: 0;
+  border: 0;
 }
 .modal-header {
   border-bottom: 0;
+  padding-bottom: 0;
+}
+.modal-body {
   padding-bottom: 0;
 }
 .modal-footer {
