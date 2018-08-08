@@ -31,7 +31,7 @@ function abrirModalEdicao(email) {
 }
 
 function editarParticipante(f) {
-  sistema.atualizarParticipante(f.nome.value, f.sobrenome.value, f.email.value, f.idade.value, f.sexo.value, f.nota.value);
+  sistema.atualizarParticipante(f.nome.value, f.sobrenome.value, f.email.value, f.idade.value, f.sexo.value, f.nota.value, f.getAttribute('email'));
   document.location.reload(true);
 }
 
@@ -41,7 +41,7 @@ function excluirParticipante(f) {
 }
 
 function templateModalEdicao(p) {
-  return `<form id="form-edicao">
+  return `<form id="form-edicao" email="${p.email}">
       <div class="form-row">
         <div class="form-group col-md-5">
           <label for="nome">Nome</label>

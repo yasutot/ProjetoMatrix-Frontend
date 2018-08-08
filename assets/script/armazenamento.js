@@ -1,10 +1,10 @@
 function Storage(key) {
 
-  function save(value) {
+  function set(value) {
     window.localStorage.setItem(key, stringify(value));
   }
 
-  function grab() {
+  function get() {
     return parse(window.localStorage.getItem(key)) || [];
   }
 
@@ -17,8 +17,8 @@ function Storage(key) {
   }
 
   return {
-    save,
-    grab,
+    set,
+    get,
     stringify,
     parse
   };

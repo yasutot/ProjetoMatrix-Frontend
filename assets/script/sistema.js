@@ -16,7 +16,7 @@ function Participante() {
  */
 function SistemaCadastro() {
     var armazenamento = new Storage('participantes');
-    var participantes = armazenamento.grab();
+    var participantes = armazenamento.get();
 
     function adicionarParticipante(nome, sobrenome, email, idade, sexo) {
         if (obterParticipante(email) != undefined)  throw "Usuário já estava cadastrado";
@@ -29,10 +29,11 @@ function SistemaCadastro() {
         p.sexo = sexo;
 
         participantes.push(p);
-        armazenamento.save(participantes);
+        armazenamento.set(participantes);
     }
-    function atualizarParticipante(nome, sobrenome, email, idade, sexo, nota) {
-        if (obterParticipante(email) != undefined) throw "Usuário com esse e-mail já cadastrado";
+    function atualizarParticipante(nome, sobrenome, email, idade, sexo, nota, antigoEmail) {
+        console.log()
+        if (email != antigoEmail && obterParticipante(email) != undefined) throw `Usuário com e-mail ${email} já cadastrado`;
 
         var p = new Participante();
         p.nome = nome;
@@ -43,16 +44,16 @@ function SistemaCadastro() {
         p.nota = nota;
         p.aprovado = avaliarAprovacao(nota);
 
-        let index = obterIndexParticipante(email);
+        let index = obterIndexParticipante(antigoEmail);
         participantes[index] = p;
-        armazenamento.save(participantes);
+        armazenamento.set(participantes);
     }
     function obterIndexParticipante(email){
         return participantes.findIndex(p => p.email === email);
     }
     function removerParticipante(email){
         participantes.splice(obterIndexParticipante(email), 1);
-        armazenamento.save(participantes);
+        armazenamento.set(participantes);
     }
     function buscarParticipantesPorNome(nome){
         return participantes.filter(p => p.nome === nome);
