@@ -32,7 +32,6 @@ function SistemaCadastro() {
         armazenamento.set(participantes);
     }
     function atualizarParticipante(nome, sobrenome, email, idade, sexo, nota, antigoEmail) {
-        console.log()
         if (email != antigoEmail && obterParticipante(email) != undefined) throw `Usuário com e-mail ${email} já cadastrado`;
 
         var p = new Participante();

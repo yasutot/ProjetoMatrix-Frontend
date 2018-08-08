@@ -13,12 +13,12 @@
       crossorigin="anonymous">
     </script>
 
-    <title>Cadastro de Participantes</title>
+    <title>Projeto Matrix 3 - Exercício</title>
   </head>
   <body>
 
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" style="border-bottom: 5px solid; margin-bottom: 10px;">
-      <a class="navbar-brand" href="#">Cadastro de Participantes</a>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="border-bottom: 5px solid; margin-bottom: 10px;">
+      <a class="navbar-brand" href="#">Projeto Matrix 3 - Exercício</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -35,22 +35,24 @@
                 aria-selected="true">Lista</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="cadastro-tab" data-toggle="tab" href="#cadastro" role="tab" aria-controls="cadastro" aria-selected="true">Cadastrar Novo</a>
+            <a class="nav-link" id="cadastro-tab" data-toggle="tab" href="#cadastro" role="tab" aria-controls="cadastro" aria-selected="true">Novo</a>
           </li> 
         </ul>
-        <form class="form-inline my-2 my-lg-0" >
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+
+        <!-- <form class="form-inline my-2 my-lg-0" >
+          <input disabled class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button disabled class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+
       </div>
     </nav>
 
     <div class="container">
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="participantes" role="tabpanel" aria-labelledby="participantes-tab">
-          <div class="card">
+          <div class="card material-shadow">
             <div class="card-header">
-              <h5>Lista de Participantes</h5>
+              <h3>Lista de Participantes</h3>
             </div>
             <div class="card-body">
               <!-- <div id="participantes" style="height:600px;width:100%;" class="ag-theme-balham"></div> -->
@@ -73,9 +75,9 @@
         </div>
       </div>
       <div class="tab-pane fade" id="cadastro" role="tabpanel" aria-labelledby="cadastro-tab">
-        <div class="card">
+        <div class="card material-shadow" id="card-cadastro">
           <div class="card-header">
-            <h5>Cadastro de Participante</h5>
+            <h3>Cadastro de Participante</h3>
           </div>
           <div class="card-body">
             <form id="form-cadastro">
@@ -116,7 +118,7 @@
             </form>
           </div>
           <div class="card-footer">
-            <button class="btn btn-primary" style="float:right" onclick="cadastrarParticipante(document.querySelector('form#form-cadastro'))">Cadastrar</button>
+            <button class="btn btn-primary material-shadow btn-no-radius" style="float:right" onclick="cadastrarParticipante(document.querySelector('form#form-cadastro'))">Cadastrar</button>
           </div>
         </div>
       </div>
@@ -135,7 +137,7 @@
           </div>
           <div class="modal-footer">
             <!-- <button type="button" class="btn btn-danger" onclick="excluirParticipante(document.querySelector('form#form-edicao'))">Excluir</button> -->
-            <button type="button" class="btn btn-primary" onclick="editarParticipante(document.querySelector('form#form-edicao'))">Salvar</button>
+            <button type="button" class="btn btn-primary btn-no-radius material-shadow" onclick="editarParticipante(document.querySelector('form#form-edicao'))">Salvar</button>
           </div>
         </div>
       </div>
