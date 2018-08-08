@@ -30,7 +30,7 @@ function abrirModalEdicao(email) {
   $('#edicao-participante').modal('show');
 }
 
-function editarParticiante(f) {
+function editarParticipante(f) {
   sistema.atualizarParticipante(f.nome.value, f.sobrenome.value, f.email.value, f.idade.value, f.sexo.value, f.nota.value);
   document.location.reload(true);
 }
