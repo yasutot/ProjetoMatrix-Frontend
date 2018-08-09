@@ -51,7 +51,7 @@
             <div class="card-header">
               <h3 style="float:left">Participantes</h3>
               <div class="btn-group dropleft" style="float: right;">
-                <a style="float: right; line-height: 2.2; color:#20282a" href="javascript:void(0)"
+                <a style="float: right; line-height: 2.2; color:#20282a; padding: 0 20px;" href="javascript:void(0)"
                   class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fas fa-ellipsis-v fa-lg"></i>
                 </a>
@@ -108,7 +108,7 @@
                 </div>
                 <div class="form-group col-md-2">
                   <label for="nota">Nota</label>
-                  <input type="number" class="form-control" id="nota" required>
+                  <input type="number" class="form-control" id="nota" min="0" max="100" step="1" required>
                 </div>
                 <div class="form-group col-md-5">
                   <div class="form-group">

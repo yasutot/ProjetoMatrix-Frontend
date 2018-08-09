@@ -78,6 +78,7 @@ function SistemaCadastro() {
         let index = obterIndexParticipante(email);
         participantes[index].nota = nota;
         participantes[index].aprovado = avaliarAprovacao(nota);
+        armazenamento.set(participantes);
     }
     function avaliarAprovacao(nota) {
         return nota >= 70 ? true : false

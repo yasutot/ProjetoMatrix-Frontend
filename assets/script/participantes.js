@@ -10,6 +10,7 @@ var sistema = new SistemaCadastro();
 
 function cadastrarParticipante(f) {
   event.preventDefault();
+  event.stopPropagation();
   sistema.adicionarParticipante(f.nome.value, f.sobrenome.value, f.email.value, f.idade.value, f.sexo.value);
   sistema.adicionarNotaAoParticipante(f.email.value, f.nota.value);
   document.location.reload(true);
