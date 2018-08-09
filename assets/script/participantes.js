@@ -4,16 +4,7 @@ var sistema = new SistemaCadastro();
   var tbody = document.querySelector('tbody');
   tbody.innerHTML = '';
   sistema.participantes.forEach(el => {
-    tbody.innerHTML += `<tr id="${el.email}" onclick="abrirModalEdicao('${el.email}')">
-        <td><input class="form-check-input" type="checkbox" value="" id="check-${el.email}" style="position: relative; text-align: center; margin: 0" disabled></td>
-        <td>${el.nome}</td>
-        <td>${el.sobrenome}</td>
-        <td>${el.email}</td>
-        <td>${el.idade}</td>
-        <td>${el.sexo == 1 ? 'Masculino' : 'Feminino'}</td>
-        <td>${el.nota}</td>
-        <td>${el.aprovado ? '<i class="fas fa-check" style="color:blue"></i>' : '<i class="fas fa-times" style="color:red"></i>'}</td>
-      </tr>`
+    tbody.innerHTML += templateLinhaParticipante(el);
   })
 })();
 
@@ -24,7 +15,8 @@ function cadastrarParticipante(f) {
   document.location.reload(true);
 }
 
-function abrirModalEdicao(email) {
+function abrirModalEdicao(target, email) {
+  if(target.classList.contains('checkbox-participante')) return;
   var participante = sistema.obterParticipante(email);
   document.querySelector("#modal-participante-body").innerHTML = templateModalEdicao(participante);
   $('#edicao-participante').modal('show');
@@ -38,6 +30,34 @@ function editarParticipante(f) {
 function excluirParticipante(f) {
   sistema.removerParticipante(f.email.value);
   document.location.reload(true);
+}
+
+function excluirParticipantes() {
+  var participantesMarcados = Array.from(document.querySelectorAll('.checkbox-participante')).filter(el => el.checked).map(el => el.getAttribute('email'))
+  if(participantesMarcados.length === 0) throw "Nenhum participante marcado";
+  participantesMarcados.forEach(email => sistema.removerParticipante(email));
+  document.location.reload(true);
+}
+
+function templateLinhaParticipante(p){
+  return `<tr id="${p.email}" onclick="abrirModalEdicao(event.target, '${p.email}')">
+    <td>
+      <span class="checkboxtext">
+        <input class="form-check-input checkbox-participante" 
+                  type="checkbox" 
+                  value="" 
+                  email="${p.email}" 
+                  style="position: relative; text-align: center; margin: 0">
+      </span>
+    </td>
+    <td>${p.nome}</td>
+    <td>${p.sobrenome}</td>
+    <td>${p.email}</td>
+    <td>${p.idade}</td>
+    <td>${p.sexo == 1 ? 'Masculino' : 'Feminino'}</td>
+    <td>${p.nota}</td>
+    <td>${p.aprovado ? '<i class="fas fa-check" style="color:blue"></i>' : '<i class="fas fa-times" style="color:red"></i>'}</td>
+  </tr>`
 }
 
 function templateModalEdicao(p) {

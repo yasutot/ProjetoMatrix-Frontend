@@ -54,6 +54,11 @@ function SistemaCadastro() {
         participantes.splice(obterIndexParticipante(email), 1);
         armazenamento.set(participantes);
     }
+    // function removerParticipantes(participantesMarcados) {
+    //     participantes.forEach(p => participantes.splice(obterIndexParticipante(p.email), 1));
+    //     participantes.forEach(p => )
+    //     armazenamento.set(participantes);
+    // }
     function buscarParticipantesPorNome(nome){
         return participantes.filter(p => p.nome === nome);
     }

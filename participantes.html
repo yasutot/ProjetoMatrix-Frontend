@@ -7,10 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style/style.css">
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
     </script>
 
     <title>Projeto Matrix 3 - Exercício</title>
@@ -24,7 +21,7 @@
       </button>
     
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 nav nav-pills">
+        <ul class="navbar-nav ml-auto nav nav-pills">
           <li class="nav-item">
             <a class="nav-link active" 
                 id="participantes-tab"
@@ -52,7 +49,16 @@
         <div class="tab-pane fade show active" id="participantes" role="tabpanel" aria-labelledby="participantes-tab">
           <div class="card material-shadow">
             <div class="card-header">
-              <h3>Lista de Participantes</h3>
+              <h3 style="float:left">Participantes</h3>
+              <div class="btn-group dropleft" style="float: right;">
+                <a style="float: right; line-height: 2.2; color:#20282a" href="javascript:void(0)"
+                  class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fas fa-ellipsis-v fa-lg"></i>
+                </a>
+                <div class="dropdown-menu material-shadow" style="border-radius:0;">
+                  <a class="dropdown-item" href="javascript:void(0)" onclick="excluirParticipantes()">Excluir Marcados</a>
+                </div>
+              </div>
             </div>
             <div class="card-body">
               <!-- <div id="participantes" style="height:600px;width:100%;" class="ag-theme-balham"></div> -->
@@ -77,37 +83,37 @@
       <div class="tab-pane fade" id="cadastro" role="tabpanel" aria-labelledby="cadastro-tab">
         <div class="card material-shadow" id="card-cadastro">
           <div class="card-header">
-            <h3>Cadastro de Participante</h3>
+            <h3>Cadastro</h3>
           </div>
           <div class="card-body">
-            <form id="form-cadastro">
+            <form id="form-cadastro" onsubmit="cadastrarParticipante(document.querySelector('form#form-cadastro'))">
               <div class="form-row">
                 <div class="form-group col-md-5">
                   <label for="nome">Nome</label>
-                  <input type="text" class="form-control" id="nome">
+                  <input type="text" class="form-control" id="nome" required>
                 </div>
                 <div class="form-group col-md-5">
                   <label for="sobrenome">Sobrenome</label>
-                  <input type="text" class="form-control" id="sobrenome">
+                  <input type="text" class="form-control" id="sobrenome" required>
                 </div>
                 <div class="form-group col-md-2">
                   <label for="idade">Idade</label>
-                  <input type="number" class="form-control" id="idade">
+                  <input type="number" class="form-control" id="idade" required>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-5">
                   <label for="email">Email</label>
-                  <input type="email" class="form-control" id="email">
+                  <input type="email" class="form-control" id="email" required>
                 </div>
                 <div class="form-group col-md-2">
                   <label for="nota">Nota</label>
-                  <input type="number" class="form-control" id="nota">
+                  <input type="number" class="form-control" id="nota" required>
                 </div>
                 <div class="form-group col-md-5">
                   <div class="form-group">
                     <label for="sexo">Sexo</label>
-                    <select class="form-control" id="sexo">
+                    <select class="form-control" id="sexo" required>
                       <option value="" selected></option>
                       <option value="1">Masculino</option>
                       <option value="2">Feminino</option>
@@ -115,20 +121,17 @@
                   </div>
                 </div>
               </div>
+              <button type="submit" class="btn btn-primary material-shadow-hoverable btn-no-radius" style="float:right">Cadastrar</button>
             </form>
-          </div>
-          <div class="card-footer">
-            <button class="btn btn-primary material-shadow-hoverable btn-no-radius" style="float:right" onclick="cadastrarParticipante(document.querySelector('form#form-cadastro'))">Cadastrar</button>
           </div>
         </div>
       </div>
-    </div>
 
     <div class="modal fade" id="edicao-participante" tabindex="-1" role="dialog" aria-labelledby="edicao-participante" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content material-shadow-hoverable">
           <div class="modal-header">
-            <h5 class="modal-title" id="titulo-modal">Editar Participante</h5>
+            <h5 class="modal-title" id="titulo-modal">Editar</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -149,5 +152,26 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+    </script>
   </body>
 </html>
