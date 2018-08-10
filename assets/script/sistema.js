@@ -15,12 +15,13 @@ function Participante() {
  * instancia em todas as operações.
  */
 function SistemaCadastro() {
-    var armazenamento = new Storage('participantes');
-    var participantes = armazenamento.get();
+    var armazenamento = new Armazenamento('participantes', 'email');
 
+    function obterTodosParticipantes() {
+        console.log(armazenamento.obterItens())
+        return armazenamento.obterItens();
+    }
     function adicionarParticipante(nome, sobrenome, email, idade, sexo) {
-        if (obterParticipante(email) != undefined)  throw "Usuário já estava cadastrado";
-
         var p = new Participante();
         p.nome = nome;
         p.sobrenome = sobrenome;
@@ -28,12 +29,9 @@ function SistemaCadastro() {
         p.idade = idade;
         p.sexo = sexo;
 
-        participantes.push(p);
-        armazenamento.set(participantes);
+        armazenamento.adicionarItem(p);
     }
     function atualizarParticipante(nome, sobrenome, email, idade, sexo, nota, antigoEmail) {
-        if (email != antigoEmail && obterParticipante(email) != undefined) throw `Usuário com e-mail ${email} já cadastrado`;
-
         var p = new Participante();
         p.nome = nome;
         p.sobrenome = sobrenome;
@@ -43,65 +41,50 @@ function SistemaCadastro() {
         p.nota = nota;
         p.aprovado = avaliarAprovacao(nota);
 
-        let index = obterIndexParticipante(antigoEmail);
-        participantes[index] = p;
-        armazenamento.set(participantes);
-    }
-    function obterIndexParticipante(email){
-        return participantes.findIndex(p => p.email === email);
+        armazenamento.atualizarItem(p, antigoEmail);
     }
     function removerParticipante(email){
-        participantes.splice(obterIndexParticipante(email), 1);
-        armazenamento.set(participantes);
+        armazenamento.apagarItem(email);
     }
-    // function removerParticipantes(participantesMarcados) {
-    //     participantes.forEach(p => participantes.splice(obterIndexParticipante(p.email), 1));
-    //     participantes.forEach(p => )
-    //     armazenamento.set(participantes);
-    // }
     function buscarParticipantesPorNome(nome){
-        return participantes.filter(p => p.nome === nome);
+        return armazenamento.obterItem('nome', nome);
     }
     function buscarParticipantesPorSexo(sexo){
-        return participantes.filter(p => p.sexo === sexo);
+        return armazenamento.obterItem('sexo', sexo);
     }
     function buscarParticipantesAprovados(){
-        return participantes.filter(p => p.aprovado);
+        return armazenamento.obterItem('aprovado', true);
     }
     function buscarParticipantesReprovados(){
-        return participantes.filter(p => p.aprovado === false);
+        return armazenamento.obterItem('aprovado', false);
     }
     function obterParticipante(email){
-        return participantes.find(p => p.email === email);
+        return armazenamento.obterItem('email', email);
     }
     function adicionarNotaAoParticipante(email, nota){
-        let index = obterIndexParticipante(email);
-        participantes[index].nota = nota;
-        participantes[index].aprovado = avaliarAprovacao(nota);
-        armazenamento.set(participantes);
+        armazenamento.alterarValor(email, 'nota', nota);
+        armazenamento.alterarValor(email, 'aprovado', avaliarAprovacao(nota));
     }
     function avaliarAprovacao(nota) {
         return nota >= 70 ? true : false
     }
     function obterMediaDasNotasDosParticipantes(){
-        return participantes.reduce((t,a) => t + a.nota, 0)/obterTotalDeParticipantes();
+        return armazenamento.obterItens().reduce(t,a => t + a.nota, 0)/armazenamento.obterContagemItens();
     }
     function obterTotalDeParticipantes(){
         return participantes.length;
     }
     function verificarSeParticipanteEstaAprovado(email){
-        return obterParticipante(email).aprovado;
+        armazenamento.obterItem(email).aprovado;
     }
     function obterQuantidadeDeParticipantesPorSexo(sexo){
-        return participantes.filter(p => p.sexo === sexo).length;
+        return armazenamento.obterItens().filter(p => p.sexo === sexo).length;
     }
 
     return {
-        participantes,
-        atualizarParticipante,
-        obterIndexParticipante,
-        avaliarAprovacao,
+        obterTodosParticipantes,
         adicionarParticipante,
+        atualizarParticipante,
         removerParticipante,
         buscarParticipantesPorNome,
         buscarParticipantesPorSexo,
@@ -109,6 +92,7 @@ function SistemaCadastro() {
         buscarParticipantesReprovados,
         obterParticipante,
         adicionarNotaAoParticipante,
+        avaliarAprovacao,
         obterMediaDasNotasDosParticipantes,
         obterTotalDeParticipantes,
         verificarSeParticipanteEstaAprovado,

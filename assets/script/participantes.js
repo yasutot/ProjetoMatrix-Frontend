@@ -3,7 +3,8 @@ var sistema = new SistemaCadastro();
 (function popularTabela() {
   var tbody = document.querySelector('tbody');
   tbody.innerHTML = '';
-  sistema.participantes.forEach(el => {
+  console.log(sistema.obterTodosParticipantes())
+  sistema.obterTodosParticipantes().forEach(el => {
     tbody.innerHTML += templateLinhaParticipante(el);
   })
 })();
@@ -34,8 +35,10 @@ function excluirParticipante(f) {
 }
 
 function excluirParticipantes() {
-  var participantesMarcados = Array.from(document.querySelectorAll('.checkbox-participante')).filter(el => el.checked).map(el => el.getAttribute('email'))
+  var participantesMarcados = Array.from(document.querySelectorAll('.checkbox-participante')).filter(el => el.checked).map(el => el.getAttribute('email'));
+  
   if(participantesMarcados.length === 0) throw "Nenhum participante marcado";
+
   participantesMarcados.forEach(email => sistema.removerParticipante(email));
   document.location.reload(true);
 }
