@@ -77,7 +77,7 @@ function templateModalEdicao(p) {
         </div>
         <div class="form-group col-md-2">
           <label for="idade">Idade</label>
-          <input type="number" class="form-control" id="idade" value="${p.idade}">
+          <input type="number" class="form-control" id="idade" min="0" step="1" value="${p.idade}">
         </div>
       </div>
       <div class="form-row">
@@ -87,7 +87,7 @@ function templateModalEdicao(p) {
         </div>
         <div class="form-group col-md-2">
           <label for="nota">Nota</label>
-          <input type="number" class="form-control" id="nota" value="${p.nota}">
+          <input type="number" class="form-control" id="nota" min="0" max="100" step="1" value="${p.nota}">
         </div>
         <div class="form-group col-md-5">
           <div class="form-group">
